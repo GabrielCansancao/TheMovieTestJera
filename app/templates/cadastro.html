@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>TheMovies</title>
+</head>
+
+<body>
+    <h1>The Movies</h1>
+    <a href="{{url_for('logar')}}"><input type="submit" value="Entrar"></a>
+    <form action="" method="POST" style="margin:auto;max-width:300px">
+        <h2>Cadastrar</h2>
+        {{ form.csrf_token }}
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            {{ form.nome( class="form-control") }}
+            {% if form.errors.nome %}
+            <div class="alert alert-danger" role="alert">
+                {{ form.errors.nome}}
+            </div>
+            {% endif %}
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="dataNasc">Data de Nascimento(dd-mm-aa):</label>
+            {{ form.dataNasc() }}
+            {% if form.errors.dataNasc %}
+            <div class="alert alert-danger" role="alert">
+                {{ form.errors.dataNasc}}
+            </div>
+            {% endif %}
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            {{ form.email( class="form-control")}}
+            {% if form.errors.email %}
+            <div class="alert alert-danger" role="alert">
+                {{ form.errors.email}}
+            </div>
+            {% endif %}
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            {{ form.senha( class="form-control")}}
+            {% if form.errors.senha %}
+            <div class="alert alert-danger" role="alert">
+                {{ form.errors.senha}}
+            </div>
+            {% endif %}
+        </div>
+        <br>
+        <input type="submit" value="Cadastrar">
+    </form>
+
+</body>
+
+</html>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+<!doctype html>
+<title>The Movies</title>
+
+<div style="float: right;margin-right: 20px;max-width:300px">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li style="color: red;">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</div>
+{% block body %}
+{% endblock %}

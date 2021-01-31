@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>The Movies</title>
+</head>
+
+<body>
+    <a href="{{ url_for('index') }}">
+        <h1>The Movies</h1>
+    </a>
+    <div style="margin:auto;max-width:100%">
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('deslogar')}}">Logout</a>
+        <h2>Bem vindo(a), {{ current_user.nome }} !</h2>
+        <div style="margin:auto;max-width:100%">
+            <h3>Informações:</h3>
+            <ul>
+                <li>Nome: {{ current_user.nome }}</li>
+                <li>Email: {{ current_user.email }}</li>
+                <li>Data de Nascimento: {{ current_user.dataNasc }}</li>
+                <li>Senha: {{ current_user.senha }}</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Perfis:</h3>
+            <form action="" method="POST">
+                {{ form.csrf_token }}
+                <div class="form-group">
+                    {{ form.nome( class="form-control") }}
+                    {% if form.errors.nome %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ form.errors.nome}}
+                    </div>
+                </div>
+            </form>
+            <pre><code id="python_code">form.idUsuario = current_user.id</code></pre>
+        </div>
+        {% endif %}
+        <input type="submit" value="Criar">
+        {% if todos %}
+        <ol class="flashes">
+            {% for perfil in todos %}
+            <a href="{{ url_for('perfil', nomePerfil = perfil.nome, idPerfil = perfil.id) }}">
+                <li>{{ perfil.nome }}</li>
+            </a>
+            {% endfor %}
+        </ol>
+        {% endif %}
+
+        {% else %}
+        <h2>Realize o login para acessar sua conta</h2>
+        <a href="{{ url_for('logar')}}">Login</a>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>
+{% endblock %}
